@@ -1,61 +1,262 @@
+
 # Screen-Time-Control
 Smart Screen Time Control helps you break phone addiction by automatically blocking apps when you've used them too much. Track usage, enforce limits, and stay focused—all offline with a simple, clean interface.
+> **An Android application that helps users reduce screen addiction by monitoring app usage, enforcing time limits, and blocking selected apps.**
 
-```markdown
-# Smart Screen Time Control App 📱⏰
+## 📋 Table of Contents
 
-<div align="center">
-
-![Android](https://img.shields.io/badge/Platform-Android-3DDC84?logo=android&logoColor=white)
-![Kotlin](https://img.shields.io/badge/Language-Kotlin-7F52FF?logo=kotlin&logoColor=white)
-![API](https://img.shields.io/badge/API-26%2B-brightgreen)
-![License](https://img.shields.io/badge/License-MIT-blue)
-
-**A beginner-to-intermediate Android app that helps users reduce screen addiction by monitoring app usage, enforcing time limits, and blocking selected apps.**
-
-[Features](#features) • [Installation](#installation) • [How It Works](#how-it-works) • [Setup](#setup) • [Contributing](#contributing)
-
-</div>
+- [Overview](#overview)
+- [Features](#features)
+- [Screenshots](#screenshots)
+- [Architecture](#architecture)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Permissions](#permissions)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Future Enhancements](#future-enhancements)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
 ---
 
-## 📋 Overview
+## 🌟 Overview
 
-Smart Screen Time Control is a lightweight Android application built with **Kotlin** that promotes digital wellbeing by:
-- ⏱️ Tracking real-time app usage
-- 🚫 Blocking apps when time limits are exceeded
-- ⏳ Enforcing cooldown periods to prevent reopening
-- 💾 Using local storage (no internet required)
+**Smart Screen Time Control** is a productivity-focused Android app designed to combat smartphone addiction by:
 
-Perfect for students, professionals, or anyone looking to build healthier smartphone habits.
+- Monitoring time spent on specific apps (e.g., Instagram)
+- Enforcing configurable time limits
+- Blocking apps with a full-screen overlay when limits are exceeded
+- Implementing cooldown periods to prevent immediate reopening
+
+This is a **Version 1** implementation focusing on core functionality without third-party dependencies.
 
 ---
 
 ## ✨ Features
 
 ### Core Functionality
-- ✅ **Real-time App Monitoring** - Detects when monitored apps are opened using Accessibility Service
-- ✅ **Time Limit Enforcement** - Default 10-minute session limit (customizable)
-- ✅ **Full-Screen Blocking Overlay** - Prevents interaction when limits are exceeded
-- ✅ **30-Minute Cooldown** - Restricts app reopening after blocking
-- ✅ **Persistent Session Tracking** - Remembers usage across app restarts
-- ✅ **No Third-Party Dependencies** - Pure Kotlin/Android SDK implementation
-- ✅ **Offline-First** - All data stored locally using SharedPreferences
 
-### Technical Highlights
-- 🏗️ **Clean Architecture** - Separated concerns with dedicated managers
-- 🔒 **Permission Handling** - Guided setup for required Android permissions
-- 📊 **Accurate Time Tracking** - Millisecond-precision session management
-- 🛡️ **Crash-Safe** - Null-safe Kotlin with defensive coding practices
+✅ **Real-Time App Monitoring**
+- Uses AccessibilityService to detect when monitored apps are opened
+- Tracks session duration automatically
+
+✅ **Time Limit Enforcement**
+- Default 10-minute usage session
+- Automatic blocking when limit is exceeded
+
+✅ **Smart Cooldown System**
+- 30-minute cooldown period after blocking
+- Prevents immediate app reopening
+
+✅ **Full-Screen Blocking Overlay**
+- Displays motivational message
+- Shows remaining cooldown time
+- Provides quick access to home screen
+
+✅ **Persistent Data Storage**
+- Uses SharedPreferences for configuration
+- Stores time limits, cooldown periods, and session data
+
+✅ **Permission Management**
+- Guides users through enabling required permissions
+- Real-time permission status display
+
+---
+# Smart Screen Time Control App - Version 1
+
+I'll provide you with a complete working Android application that monitors and controls screen time. Let's build this step by step.
+
+## 📁 Project Structure
+
+```
+SmartScreenTimeControl/
+├── app/
+│   ├── src/
+│   │   ├── main/
+│   │   │   ├── java/com/example/smartscreentime/
+│   │   │   │   ├── MainActivity.kt
+│   │   │   │   ├── AppUsageService.kt
+│   │   │   │   ├── BlockOverlayService.kt
+│   │   │   │   ├── PrefsManager.kt
+│   │   │   │   └── TimeManager.kt
+│   │   │   ├── res/
+│   │   │   │   ├── layout/
+│   │   │   │   │   ├── activity_main.xml
+│   │   │   │   │   └── overlay_block.xml
+│   │   │   │   ├── values/
+│   │   │   │   │   ├── strings.xml
+│   │   │   │   │   └── colors.xml
+│   │   │   │   └── xml/
+│   │   │   │       └── accessibility_service_config.xml
+│   │   │   └── AndroidManifest.xml
+```
+
+---
+## 🧪 Testing Instructions
+
+### On Real Android Device:
+
+1. **Install the app**
+2. **Open the app** - you'll see the main screen with permission statuses
+3. **Click "Enable All Permissions"** button and grant:
+   - Usage Access Permission
+   - Draw Over Apps Permission
+   - Accessibility Service Permission
+4. **Return to the app** - all permissions should show ✅
+5. **Open Instagram** (must be installed)
+6. **Wait 10 minutes** OR modify `DEFAULT_TIME_LIMIT` to 1 minute for testing
+7. **Verify** the block overlay appears
+8. **Try reopening Instagram** - should be blocked for 30 minutes
+
+### Quick Test Mode:
+In `PrefsManager.kt`, change:
+```kotlin
+const val DEFAULT_TIME_LIMIT = 1 // 1 minute instead of 10
+const val DEFAULT_COOLDOWN = 2 // 2 minutes instead of 30
+```
+
+---
+
+## 🎯 Key Features Implemented
+
+✅ Permission handling (Usage Access, Overlay, Accessibility)  
+✅ Real-time app monitoring using AccessibilityService  
+✅ 10-minute session time limit  
+✅ 30-minute cooldown after blocking  
+✅ Full-screen blocking overlay  
+✅ Persistent storage using SharedPreferences  
+✅ Automatic home navigation when blocked  
+✅ Real-time cooldown timer display  
+
+---
+
+## 📝 Important Notes
+
+- **Must test on a real device** (not emulator for full functionality)
+- Instagram app must be installed
+- All three permissions are mandatory
+- Service runs in background continuously
+- Overlay cannot be dismissed until cooldown ends
+
+---
+
+## 🐛 Troubleshooting
+
+**Service not working?**
+- Check all permissions are granted
+- Restart the device after granting permissions
+- Verify Accessibility Service is ON in Settings
+
+**Overlay not showing?**
+- Ensure "Draw Over Apps" permission is granted
+- Check Android battery optimization is disabled for the app
+
+**Time limit not working?**
+- Verify accessibility service is running
+- Check Logcat for "AppUsageService" tags
+
+## 📋 Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Architecture](#architecture)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Permissions](#permissions)
+- [Tech Stack](#tech-stack)
+
+---
+
+## 🌟 Overview
+
+**Smart Screen Time Control** is a productivity-focused Android app designed to combat smartphone addiction by:
+
+- Monitoring time spent on specific apps (e.g., Instagram)
+- Enforcing configurable time limits
+- Blocking apps with a full-screen overlay when limits are exceeded
+- Implementing cooldown periods to prevent immediate reopening
+
+This is a **Version 1** implementation focusing on core functionality without third-party dependencies.
+
+---
+
+## ✨ Features
+
+### Core Functionality
+
+✅ **Real-Time App Monitoring**
+- Uses AccessibilityService to detect when monitored apps are opened
+- Tracks session duration automatically
+
+✅ **Time Limit Enforcement**
+- Default 10-minute usage session
+- Automatic blocking when limit is exceeded
+
+✅ **Smart Cooldown System**
+- 30-minute cooldown period after blocking
+- Prevents immediate app reopening
+
+✅ **Full-Screen Blocking Overlay**
+- Displays motivational message
+- Shows remaining cooldown time
+- Provides quick access to home screen
+
+✅ **Persistent Data Storage**
+- Uses SharedPreferences for configuration
+- Stores time limits, cooldown periods, and session data
+
+✅ **Permission Management**
+- Guides users through enabling required permissions
+- Real-time permission status display
+
+---
+
+## 🏗️ Architecture
+
+### Components
+
+```
+┌─────────────────────────────────────────────┐
+│          MainActivity.kt                    │
+│  (Permission Requests & Status Display)     │
+└────────────────┬────────────────────────────┘
+                 │
+                 ├──────────────────────────────┐
+                 │                              │
+    ┌────────────▼──────────┐     ┌─────────────▼──────────┐
+    │  AppUsageService.kt   │     │ BlockOverlayService.kt │
+    │ (Monitor Foreground)  │────▶│  (Display Blocker)     │
+    └────────────┬──────────┘     └─────────────┬──────────┘
+                 │                              │
+                 └──────────┬───────────────────┘
+                            │
+              ┌─────────────▼────────────┐
+              │   TimeManager.kt         │
+              │ (Cooldown & Limit Logic) │
+              └─────────────┬────────────┘
+                            │
+              ┌─────────────▼────────────┐
+              │   PrefsManager.kt        │
+              │ (Persistent Storage)     │
+              └──────────────────────────┘
+```
+
+### Design Pattern
+- **Separation of Concerns**: Each component handles specific functionality
+- **Manager Pattern**: TimeManager and PrefsManager encapsulate business logic
+- **Service-Oriented**: Background monitoring using Android Services
 
 ---
 
 ## 🚀 Installation
 
 ### Prerequisites
-- Android Studio Arctic Fox or later
-- Android device with **API 26 (Android 8.0)** or higher
-- Physical device recommended (emulators may have limited accessibility features)
+
+- Android Studio (Electric Eel or newer)
+- Android device with API 26+ (Android 8.0 Oreo or higher)
+- Kotlin 1.8+
 
 ### Steps
 
@@ -63,10 +264,11 @@ Perfect for students, professionals, or anyone looking to build healthier smartp
    ```bash
    git clone https://github.com/yourusername/smart-screen-time-control.git
    cd smart-screen-time-control
-   ---
+   ```
+
 2. **Open in Android Studio**
    - Launch Android Studio
-   - Select `File > Open`
+   - Select "Open an Existing Project"
    - Navigate to the cloned directory
 
 3. **Build the project**
@@ -76,228 +278,85 @@ Perfect for students, professionals, or anyone looking to build healthier smartp
 
 4. **Run on device**
    - Connect your Android device via USB
-   - Enable USB Debugging in Developer Options
-   - Click `Run` in Android Studio
+   - Enable USB Debugging
+   - Click Run ▶️ in Android Studio
 
 ---
 
-## ⚙️ Setup
+## 📖 Usage
 
-### Required Permissions
+### First-Time Setup
 
-The app needs three critical permissions to function:
+1. **Launch the app**
+2. **Grant permissions** by clicking "Enable All Permissions"
+   - Usage Access Permission
+   - Draw Over Apps Permission
+   - Accessibility Service Permission
+3. **Verify** all permissions show ✅ (green checkmarks)
 
-#### 1. **Draw Over Other Apps** (Overlay Permission)
-- Allows the app to display blocking screen
-- Settings → Apps → Special Access → Display over other apps
+### Monitoring Apps
 
-#### 2. **Usage Access** (App Usage Stats)
-- Enables tracking of foreground apps
-- Settings → Security → Apps with usage access
+Currently monitors **Instagram** by default:
+- **Package**: `com.instagram.android`
+- **Time Limit**: 10 minutes
+- **Cooldown**: 30 minutes
 
-#### 3. **Accessibility Service**
-- Detects when monitored apps are opened
-- Settings → Accessibility → Smart Screen Time → Enable
+### Testing
 
-### First-Time Setup Flow
-
-```
-1. Install app
-2. Open app and tap "Enable Required Permissions"
-3. Follow system prompts to enable each permission
-4. Return to app and verify status
-5. Open monitored app (Instagram) to test
-```
-
----
-
-## 🔧 How It Works
-
-### Architecture Overview
-
-```
-┌─────────────────────────────────────────────────────┐
-│                   MainActivity                       │
-│              (Permission Handling)                   │
-└─────────────────┬───────────────────────────────────┘
-                  │
-        ┌─────────┴──────────┐
-        │                    │
-┌───────▼─────────┐  ┌───────▼──────────┐
-│ AppUsageService │  │ BlockOverlayService│
-│  (Accessibility) │  │   (Foreground)    │
-└───────┬─────────┘  └──────────────────┘
-        │
-    ┌───▼────┐
-    │ Managers │
-    ├────────┤
-    │ PrefsManager  │ → SharedPreferences
-    │ TimeManager   │ → Session Logic
-    └──────────────┘
-```
-
-### Key Components
-
-| Component | Responsibility |
-|-----------|---------------|
-| **MainActivity.kt** | UI, permission requests, status display |
-| **AppUsageService.kt** | Foreground app detection via Accessibility |
-| **BlockOverlayService.kt** | Full-screen blocking overlay management |
-| **PrefsManager.kt** | Local storage wrapper (SharedPreferences) |
-| **TimeManager.kt** | Session timing and cooldown logic |
-
----
-
-## 📂 Project Structure
-
-```
-app/
-├── src/main/
-│   ├── java/com/example/smartscreentime/
-│   │   ├── MainActivity.kt              # Entry point & permissions
-│   │   ├── AppUsageService.kt           # Accessibility service
-│   │   ├── BlockOverlayService.kt       # Overlay display
-│   │   ├── PrefsManager.kt              # Data persistence
-│   │   └── TimeManager.kt               # Time calculations
-│   ├── res/
-│   │   ├── layout/
-│   │   │   ├── activity_main.xml        # Main UI
-│   │   │   └── overlay_block.xml        # Block screen UI
-│   │   ├── values/
-│   │   │   └── strings.xml
-│   │   └── xml/
-│   │       └── accessibility_config.xml # Service config
-│   └── AndroidManifest.xml              # App configuration
-└── build.gradle
-```
-
----
-
-## 🎯 Configuration
-
-### Customize Time Limits
-
-Edit `PrefsManager.kt`:
+To test quickly, modify time limits in `PrefsManager.kt`:
 
 ```kotlin
-companion object {
-    const val DEFAULT_TIME_LIMIT = 10  // Change to desired minutes
-    const val DEFAULT_COOLDOWN = 30    // Change cooldown duration
-}
+const val DEFAULT_TIME_LIMIT = 1 // 1 minute
+const val DEFAULT_COOLDOWN = 2 // 2 minutes
 ```
-
-### Monitor Different Apps
-
-Edit `AppUsageService.kt`:
-
-```kotlin
-private val monitoredPackage = "com.instagram.android"
-// Change to:
-// "com.twitter.android"       // Twitter
-// "com.facebook.katana"       // Facebook
-// "com.snapchat.android"      // Snapchat
-// "com.zhiliaoapp.musically"  // TikTok
-```
-
-### Testing (Quick Limit)
-
-For faster testing, temporarily set:
-
-```kotlin
-const val DEFAULT_TIME_LIMIT = 1  // 1 minute for testing
-```
-
----
-
-## 🧪 Testing
-
-### Manual Testing Steps
-
-1. **Install and grant permissions**
-2. **Modify time limit to 1 minute** (optional)
-3. **Open Instagram**
-4. **Wait for limit**
-5. **Verify overlay appears**
-6. **Press OK and try reopening**
-7. **Verify cooldown blocks immediate access**
 
 ### Expected Behavior
 
-| Action | Expected Result |
-|--------|----------------|
-| First Instagram open | Session starts, timer begins |
-| Use for 10 minutes | Overlay blocks app |
-| Press OK | Overlay dismisses |
-| Reopen immediately | Overlay blocks again (cooldown) |
-| Wait 30 minutes | Instagram accessible again |
+1. Open Instagram
+2. Use for the configured time limit
+3. Block overlay appears automatically
+4. App remains blocked during cooldown period
+5. Overlay disappears when cooldown expires
 
 ---
 
-## 🛠️ Technologies Used
+## 🔐 Permissions
 
-- **Language**: Kotlin 1.9+
-- **Min SDK**: API 26 (Android 8.0 Oreo)
+### Required Permissions
+
+| Permission | Purpose | Mandatory |
+|-----------|---------|-----------|
+| **Usage Access** | Track app usage statistics | ✅ Yes |
+| **Draw Over Apps** | Display blocking overlay | ✅ Yes |
+| **Accessibility Service** | Detect foreground app changes | ✅ Yes |
+
+### Privacy Note
+
+- **No data is collected or transmitted**
+- All data stored locally using SharedPreferences
+- No internet permission required
+- No analytics or tracking
+
+---
+
+## 🛠️ Tech Stack
+
+### Language
+- **Kotlin** 100%
+
+### Android Components
+- AccessibilityService
+- WindowManager (Overlay)
+- SharedPreferences
+- Intent System
+
+### UI/UX
+- Material Design 3
+- CardView
+- ConstraintLayout
+
+### Minimum Requirements
+- **Min SDK**: API 26 (Android 8.0)
 - **Target SDK**: API 34 (Android 14)
-- **Architecture**: Service-based with manager pattern
-- **Storage**: SharedPreferences
-- **Services**: 
-  - AccessibilityService (app detection)
-  - Foreground Service (overlay)
-
----
-
-## 🔮 Future Enhancements
-
-Planned features for upcoming versions:
-
-- [ ] **Multi-app selection UI** - Choose which apps to monitor
-- [ ] **Custom time limits per app** - Different limits for different apps
-- [ ] **Usage analytics dashboard** - Daily/weekly usage graphs
-- [ ] **Focus mode scheduling** - Auto-block during study/work hours
-- [ ] **Break reminders** - Periodic notifications
-- [ ] **Export usage data** - CSV export for analysis
-- [ ] **AI-based predictions** - Predict and prevent binge usage
-- [ ] **Focus score system** - Gamification with achievements
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Here's how you can help:
-
-1. **Fork the repository**
-2. **Create a feature branch**
-   ```bash
-   git checkout -b feature/AmazingFeature
-   ```
-3. **Commit your changes**
-   ```bash
-   git commit -m 'Add some AmazingFeature'
-   ```
-4. **Push to the branch**
-   ```bash
-   git push origin feature/AmazingFeature
-   ```
-5. **Open a Pull Request**
-
-### Contribution Guidelines
-
-- Follow existing code style
-- Add comments for complex logic
-- Test on real devices before submitting
-- Update README if adding new features
-
----
-
-## 🐛 Known Issues
-
-- **Accessibility Service** may stop on some devices after system updates (user needs to re-enable)
-- **Overlay** may not block on some custom Android skins (MIUI, ColorOS) due to additional restrictions
-- **Session tracking** resets if service is killed by system (low memory)
-
-### Workarounds
-
-- Keep app in "Do Not Optimize" list in battery settings
-- Grant all permissions immediately after installation
 
 ---
