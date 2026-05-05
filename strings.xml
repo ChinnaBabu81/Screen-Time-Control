@@ -1,0 +1,15 @@
+xml
+<resources>
+    <string name="app_name">Smart Screen Time</string>
+    <string name="accessibility_service_description">This service monitors app usage to help you control screen time and reduce app addiction.</string>
+    <string name="permission_usage_access">Usage Access Permission</string>
+    <string name="permission_overlay">Draw Over Apps Permission</string>
+    <string name="permission_accessibility">Accessibility Service Permission</string>
+    <string name="enable_permissions">Enable All Permissions</string>
+    <string name="service_status">Service Status</string>
+    <string name="monitoring_active">Monitoring Active ✓</string>
+    <string name="monitoring_inactive">Monitoring Inactive ✗</string>
+    <string name="blocked_message">Time\'s up ⏳</string>
+    <string name="blocked_subtitle">Take a break. App will unlock soon.</string>
+    <string name="cooldown_info">Cooldown remaining:</string>
+</resources>
