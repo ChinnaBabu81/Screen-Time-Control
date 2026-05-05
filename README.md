@@ -63,8 +63,7 @@ Perfect for students, professionals, or anyone looking to build healthier smartp
    ```bash
    git clone https://github.com/yourusername/smart-screen-time-control.git
    cd smart-screen-time-control
-   ```
-
+   ---
 2. **Open in Android Studio**
    - Launch Android Studio
    - Select `File > Open`
