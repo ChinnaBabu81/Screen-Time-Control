@@ -1,0 +1,66 @@
+xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/overlay_dark"
+    android:clickable="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="32dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⏳"
+            android:textSize="80sp"
+            android:layout_marginBottom="24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/blocked_message"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/blocked_subtitle"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:alpha="0.9"
+            android:gravity="center"
+            android:layout_marginBottom="32dp" />
+
+        <TextView
+            android:id="@+id/tvCooldownTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time remaining: 25 min"
+            android:textSize="16sp"
+            android:textColor="@color/teal_200"
+            android:textStyle="bold"
+            android:padding="12dp"
+            android:background="@android:color/black"
+            android:layout_marginTop="16dp" />
+
+        <Button
+            android:id="@+id/btnGoHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Go to Home Screen"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/purple_500" />
+
+    </LinearLayout>
+
+</RelativeLayout>
